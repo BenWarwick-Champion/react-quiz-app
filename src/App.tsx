@@ -6,7 +6,7 @@ import QuestionCard from './components/QuestionCard';
 
 const TOTAL_QUESTIONS = 10;
 
-interface AnswerObject {
+export interface AnswerObject {
   question: string;
   answer: string;
   correct: boolean;
@@ -57,7 +57,12 @@ function App() {
   };
 
   const nextQuestion = () => {
-
+    const nextQuestion = number + 1;
+    if (nextQuestion === TOTAL_QUESTIONS) {
+      setGameOver(true);
+    } else {
+      setNumber(nextQuestion);
+    };
   };
 
   return (
@@ -66,7 +71,7 @@ function App() {
       {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
         <button className="start" onClick={startTrivia}>Start Quiz</button>
       ) : null}
-      {!gameOver ? <p className="score">Score:</p> : null}
+      {!gameOver ? <p className="score">Score: {score}</p> : null}
       {loading ? <p>Loading Questions...</p> : null}
       {!loading && !gameOver ? <QuestionCard
         questionNr={number + 1}
