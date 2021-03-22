@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Difficulty, fetchQuizQuestions, QuestionState } from './API';
 // Components
 import QuestionCard from './components/QuestionCard';
-
+// Styles
+import { GlobalStyle, Wrapper } from './App.styles';
 
 const TOTAL_QUESTIONS = 10;
 
@@ -66,7 +67,9 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <>
+    <GlobalStyle />
+    <Wrapper>
       <h1>React Quiz</h1>
       {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
         <button className="start" onClick={startTrivia}>Start Quiz</button>
@@ -84,7 +87,8 @@ function App() {
 
       {!gameOver && !loading && userAnswers.length === number + 1 && number !== TOTAL_QUESTIONS - 1 ?
         <button className="next" onClick={nextQuestion}>Next Question</button> : null}
-    </div>
+    </Wrapper>
+    </>
   )
 }
 
