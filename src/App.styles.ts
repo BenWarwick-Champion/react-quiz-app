@@ -26,6 +26,7 @@ export const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
 
     > p {
         color: #fff;
@@ -34,7 +35,7 @@ export const Wrapper = styled.div`
     .score {
         color: #fff;
         font-size: 2rem;
-        margin: 0;
+        margin: 0 0 20px;
     }
 
     h1 {
@@ -61,4 +62,13 @@ export const Wrapper = styled.div`
         max-width: 200px;
     }
 
+`
+
+export const SelectionWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    color: #fff;
+    font-size: 1.2rem;
 `

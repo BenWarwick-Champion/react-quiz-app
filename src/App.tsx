@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Difficulty, fetchQuizQuestions, QuestionState } from './API';
+import { fetchQuizQuestions, QuestionState } from './API';
 // Components
 import QuestionCard from './components/QuestionCard';
 // Styles
-import { GlobalStyle, Wrapper } from './App.styles';
+import { GlobalStyle, SelectionWrapper, Wrapper } from './App.styles';
 
 const TOTAL_QUESTIONS = 10;
 
@@ -27,9 +27,10 @@ function App() {
     setLoading(true);
     setGameOver(false);
 
+    const difficulty = document.querySelector<HTMLSelectElement>('#difficulty')!.value;
     const newQuestions = await fetchQuizQuestions(
       TOTAL_QUESTIONS,
-      Difficulty.EASY,
+      difficulty,
     );
 
     setQuestions(newQuestions);
@@ -71,9 +72,18 @@ function App() {
     <GlobalStyle />
     <Wrapper>
       <h1>React Quiz</h1>
-      {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
-        <button className="start" onClick={startTrivia}>Start Quiz</button>
-      ) : null}
+      {gameOver || userAnswers.length === TOTAL_QUESTIONS ? 
+        <Wrapper>
+          <SelectionWrapper>
+            <label htmlFor="difficulty">Difficulty: </label>
+            <select name="difficulty" id="difficulty">
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </SelectionWrapper>
+          <button className="start" onClick={startTrivia}>Start Quiz</button>
+        </Wrapper> : null}
       {!gameOver ? <p className="score">Score: {score}</p> : null}
       {loading ? <p>Loading Questions...</p> : null}
       {!loading && !gameOver ? <QuestionCard
